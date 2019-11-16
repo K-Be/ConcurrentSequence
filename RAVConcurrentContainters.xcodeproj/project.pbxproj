@@ -10,6 +10,8 @@
 		13AD419C2351A9E500A5871E /* RAVConcurrentContainters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13AD41922351A9E500A5871E /* RAVConcurrentContainters.framework */; };
 		13AD41A12351A9E500A5871E /* RAVConcurrentContaintersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AD41A02351A9E500A5871E /* RAVConcurrentContaintersTests.swift */; };
 		13AD41A32351A9E500A5871E /* RAVConcurrentContainters.h in Headers */ = {isa = PBXBuildFile; fileRef = 13AD41952351A9E500A5871E /* RAVConcurrentContainters.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		13AD41AD2351AE1600A5871E /* ConcurrentSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AD41AC2351AE1600A5871E /* ConcurrentSequence.swift */; };
+		13AD41B12351B42000A5871E /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AD41B02351B42000A5871E /* Lock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +31,8 @@
 		13AD419B2351A9E500A5871E /* RAVConcurrentContaintersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RAVConcurrentContaintersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		13AD41A02351A9E500A5871E /* RAVConcurrentContaintersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAVConcurrentContaintersTests.swift; sourceTree = "<group>"; };
 		13AD41A22351A9E500A5871E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		13AD41AC2351AE1600A5871E /* ConcurrentSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentSequence.swift; sourceTree = "<group>"; };
+		13AD41B02351B42000A5871E /* Lock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +76,8 @@
 			isa = PBXGroup;
 			children = (
 				13AD41952351A9E500A5871E /* RAVConcurrentContainters.h */,
+				13AD41AC2351AE1600A5871E /* ConcurrentSequence.swift */,
+				13AD41B02351B42000A5871E /* Lock.swift */,
 				13AD41962351A9E500A5871E /* Info.plist */,
 			);
 			path = RAVConcurrentContainters;
@@ -148,6 +154,7 @@
 				TargetAttributes = {
 					13AD41912351A9E500A5871E = {
 						CreatedOnToolsVersion = 11.1;
+						LastSwiftMigration = 1110;
 					};
 					13AD419A2351A9E500A5871E = {
 						CreatedOnToolsVersion = 11.1;
@@ -195,6 +202,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13AD41AD2351AE1600A5871E /* ConcurrentSequence.swift in Sources */,
+				13AD41B12351B42000A5871E /* Lock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +348,7 @@
 		13AD41A72351A9E500A5871E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -356,6 +366,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.home.RAVConcurrentContainters;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -363,6 +374,7 @@
 		13AD41A82351A9E500A5871E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -387,6 +399,7 @@
 		13AD41AA2351A9E500A5871E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 25WDLLAK34;
@@ -405,6 +418,7 @@
 		13AD41AB2351A9E500A5871E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 25WDLLAK34;
