@@ -11,8 +11,13 @@ import XCTest
 
 class RAVConcurrentContaintersTests: XCTestCase {
 
+	@objc func toMultithreadNotification(_ notification: Notification){
+		
+	}
+	
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+			
     }
 
     override func tearDown() {

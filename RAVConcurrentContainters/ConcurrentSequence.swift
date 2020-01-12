@@ -9,8 +9,8 @@
 import Foundation
 
 
-public struct ConcurrentSequence <Seq : Sequence> : Sequence {
-       
+public struct ConcurrentSequence <Seq : Sequence> : ConcurrentSequenceP, Enumerated, ConcurrentEnumerators {
+		
     public typealias Element = Seq.Element
     public typealias Iterator = Seq.Iterator
     
@@ -47,97 +47,76 @@ public struct ConcurrentSequence <Seq : Sequence> : Sequence {
         queue.waitUntilAllOperationsAreFinished()
     }
     
-    
-    public func map<T>(_ transform: @escaping (Seq.Element) -> T) -> [T] {
-        var resultElements = Array<T>()
-        let lock = Lock()
-        self.forEach { (element) in
-            let transformed = transform(element);
-            lock.sync {
-                resultElements.append(transformed)
-            }
-        }
-        
-        return resultElements
-    }
-    
-    
-    public func compactMap<ElementOfResult>(_ transform: @escaping (Seq.Element) -> ElementOfResult?) -> [ElementOfResult] {
-        var result = Array<ElementOfResult>()
-        let lock = Lock()
-        self.forEach { (element:Seq.Element) in
-            guard let transformedElement = transform(element) else {
-                return
-            }
-            lock.sync {
-                result.append(transformedElement)
-            }
-        }
-        return result;
-    }
-    
-    
-    public func filter(_ isIncluded: @escaping (Self.Element) -> Bool) -> [Self.Element] {
-        var resultElements = Array<Self.Element>()
-        let lock = Lock()
-        self.forEach { (element:Seq.Element) in
-            let good = isIncluded(element)
-            if good {
-                lock.sync {
-                    resultElements.append(element)
+	
+    public func forEach(_ body: @escaping (_ element:Seq.Element, _ stop: inout Bool) -> Void) {
+        let queue = OperationQueue()
+        queue.qualityOfService = self.qualityOfService
+        var stop = false;
+        for item in self.storage {
+            queue.addOperation {
+                var localStop = false;
+                if !stop {
+                    body(item, &localStop);
+                }
+                
+                if localStop && !stop
+                {
+                    stop = localStop;
+                    queue.cancelAllOperations();
                 }
             }
+            if stop {
+                break;
+            }
         }
-        
-        return resultElements
+        queue.waitUntilAllOperationsAreFinished()
     }
     
-    
-    public func first(where predicate: @escaping (Self.Element) -> Bool) -> Self.Element? {
-        var goodResults = Array<EnumeratedSequence<Array<Self.Element> >.Element>();
-        let lock = Lock();
-        self.storage.enumerated().concurrent.forEach { (numericElement) in
-            let (_, element) : (Int, Self.Element) = numericElement;
-            var emptyResults = true
-            lock.sync {
-                emptyResults = goodResults.isEmpty
-            }
-            if emptyResults {
-                let good = predicate(element)
-                if good {
-                    goodResults.append(numericElement)
+    public func forEach<OtherSequence>(withOther other: OtherSequence, _ body: @escaping (_ selfElement: Seq.Element?, _ otherElement: OtherSequence.Element?, _ stop: inout Bool) -> Void) -> Void where OtherSequence : Sequence {
+        
+        let queue = OperationQueue()
+        queue.qualityOfService = self.qualityOfService
+        var stop = false
+        let lock = Lock()
+        
+        var selfIterator = self.makeIterator()
+        var otherIterator = other.makeIterator()
+        
+        var selfItem = selfIterator.next()
+        var otherItem = otherIterator.next()
+        while  (selfItem != nil || otherItem != nil) && !stop  {
+            queue.addOperation {
+                var localStop = false;
+                if !stop {
+                    body(selfItem, otherItem, &localStop);
+                }
+                
+                if localStop && !stop {
+                    lock.sync {
+                        stop = localStop
+                        queue.cancelAllOperations()
+                    }
                 }
             }
+            
+            selfItem = selfIterator.next()
+            otherItem = otherIterator.next()
         }
         
-        let result = goodResults.min { (numericElem1, numericElem2) -> Bool in
-            let (index1, _) = numericElem1
-            let (index2, _) = numericElem2
-            let less = index1 < index2
-            return less
-        }
-        return result?.element
+        queue.waitUntilAllOperationsAreFinished()
     }
-    
-    
-    
-    
+	
+	
+	public func enumerated() -> EnumeratedSequence <Seq> {
+		return self.storage.enumerated()
+	}
 }
 
 
-public extension Array {
+public extension Sequence {
     var concurrent : ConcurrentSequence<Self> {
         get {
             return ConcurrentSequence(withSequence: self)
-        }
-    }
-}
-
-
-public extension EnumeratedSequence {
-    var concurrent : ConcurrentSequence<Self> {
-        get {
-            return ConcurrentSequence(withSequence: self);
         }
     }
 }

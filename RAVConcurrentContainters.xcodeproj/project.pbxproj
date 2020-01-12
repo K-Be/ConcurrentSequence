@@ -12,6 +12,7 @@
 		13AD41A32351A9E500A5871E /* RAVConcurrentContainters.h in Headers */ = {isa = PBXBuildFile; fileRef = 13AD41952351A9E500A5871E /* RAVConcurrentContainters.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		13AD41AD2351AE1600A5871E /* ConcurrentSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AD41AC2351AE1600A5871E /* ConcurrentSequence.swift */; };
 		13AD41B12351B42000A5871E /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AD41B02351B42000A5871E /* Lock.swift */; };
+		13E0B5E923CB497C00CA8A86 /* ConcurrentSequenceP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E0B5E823CB497C00CA8A86 /* ConcurrentSequenceP.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +34,7 @@
 		13AD41A22351A9E500A5871E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13AD41AC2351AE1600A5871E /* ConcurrentSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentSequence.swift; sourceTree = "<group>"; };
 		13AD41B02351B42000A5871E /* Lock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
+		13E0B5E823CB497C00CA8A86 /* ConcurrentSequenceP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentSequenceP.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				13AD41952351A9E500A5871E /* RAVConcurrentContainters.h */,
+				13E0B5E823CB497C00CA8A86 /* ConcurrentSequenceP.swift */,
 				13AD41AC2351AE1600A5871E /* ConcurrentSequence.swift */,
 				13AD41B02351B42000A5871E /* Lock.swift */,
 				13AD41962351A9E500A5871E /* Info.plist */,
@@ -149,7 +152,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1110;
-				LastUpgradeCheck = 1110;
+				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = "Andrew Romanov";
 				TargetAttributes = {
 					13AD41912351A9E500A5871E = {
@@ -202,6 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13E0B5E923CB497C00CA8A86 /* ConcurrentSequenceP.swift in Sources */,
 				13AD41AD2351AE1600A5871E /* ConcurrentSequence.swift in Sources */,
 				13AD41B12351B42000A5871E /* Lock.swift in Sources */,
 			);
@@ -349,10 +353,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 25WDLLAK34;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -365,6 +370,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.home.RAVConcurrentContainters;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -375,10 +381,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 25WDLLAK34;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -391,6 +398,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.home.RAVConcurrentContainters;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 			};
