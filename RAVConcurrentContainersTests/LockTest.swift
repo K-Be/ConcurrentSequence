@@ -24,7 +24,7 @@ class LockTest: XCTestCase {
                 }
             }
         }
-        
+        operationQueue.waitUntilAllOperationsAreFinished()
         XCTAssertEqual(val, numberOfOperations)
     }
 }
