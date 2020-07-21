@@ -15,30 +15,20 @@ public struct ConcurrentSequence <Seq : Sequence> : ConcurrentSequenceP, Enumera
     public typealias Iterator = Seq.Iterator
     
     private var storage : Seq;
-    private var qualityOfService : QualityOfService = .default
+    private var queue : OperationQueue
     
-    public init(withSequence sequence: Seq)
-    {
-        storage = sequence
-    }
-    
-    
-    public init(withSequence sequence: Seq, qualityOfService:QualityOfService)
+    public init(withSequence sequence: Seq, onQueue queue: OperationQueue = OperationQueue())
     {
         self.storage = sequence
-        self.qualityOfService = qualityOfService
+        self.queue = queue
     }
     
-    
     public __consuming func makeIterator() -> Seq.Iterator {
-        let iter = self.storage.makeIterator()
-        return iter
-    }    
-    
+        let iterator = self.storage.makeIterator()
+        return iterator
+    }
     
     public func forEach(_ body: @escaping (Seq.Element) -> Void) {
-        let queue = OperationQueue()
-        queue.qualityOfService = self.qualityOfService
         for item in self.storage {
             queue.addOperation {
                 body(item)
@@ -49,8 +39,6 @@ public struct ConcurrentSequence <Seq : Sequence> : ConcurrentSequenceP, Enumera
     
     
     public func forEach(_ body: @escaping (_ element:Seq.Element, _ stop: inout Bool) -> Void) {
-        let queue = OperationQueue()
-        queue.qualityOfService = self.qualityOfService
         var stop = false;
         for item in self.storage {
             queue.addOperation {
@@ -62,7 +50,7 @@ public struct ConcurrentSequence <Seq : Sequence> : ConcurrentSequenceP, Enumera
                 if localStop && !stop
                 {
                     stop = localStop;
-                    queue.cancelAllOperations();
+                    self.queue.cancelAllOperations();
                 }
             }
             if stop {
@@ -73,9 +61,6 @@ public struct ConcurrentSequence <Seq : Sequence> : ConcurrentSequenceP, Enumera
     }
     
     public func forEach<OtherSequence>(withOther other: OtherSequence, _ body: @escaping (_ selfElement: Seq.Element?, _ otherElement: OtherSequence.Element?, _ stop: inout Bool) -> Void) -> Void where OtherSequence : Sequence {
-        
-        let queue = OperationQueue()
-        queue.qualityOfService = self.qualityOfService
         var stop = false
         let lock = Lock()
         
@@ -94,7 +79,7 @@ public struct ConcurrentSequence <Seq : Sequence> : ConcurrentSequenceP, Enumera
                 if localStop && !stop {
                     lock.sync {
                         stop = localStop
-                        queue.cancelAllOperations()
+                        self.queue.cancelAllOperations()
                     }
                 }
             }
@@ -118,5 +103,9 @@ public extension Sequence {
         get {
             return ConcurrentSequence(withSequence: self)
         }
+    }
+    
+    func concurrent(onQueue queue: OperationQueue) -> ConcurrentSequence<Self> {
+        return ConcurrentSequence(withSequence: self, onQueue: queue)
     }
 }

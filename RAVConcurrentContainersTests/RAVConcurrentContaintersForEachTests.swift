@@ -24,18 +24,19 @@ class RAVConcurrentContainersTests: XCTestCase {
     //
     //	public extension ConcurrentSequenceP where Self.Element : Equatable {
     //		func elementsEqual<OtherSequence>(_ other: OtherSequence,	by areEquivalent: @escaping (Element, OtherSequence.Element) -> Bool) -> Bool where OtherSequence : Sequence, Element == OtherSequence.Element
-    func checkForEach<T: ConcurrentSequenceP>(_ concSeq: T) -> Bool  where T.Element : Any {
+    func checkForEach<T: ConcurrentSequenceP>(_ concurrentSequence: T, onQueue queue: OperationQueue) -> Bool  where T.Element : Any {
         let lock = Lock()
         var concurrentCounter = 0;
-        concSeq.forEach { (_ : Any) in
+        concurrentSequence.forEach { (_ : Any) in
+            XCTAssertEqual(OperationQueue.current, queue)
             Thread.sleep(forTimeInterval: 0.01)
             lock.sync {
                 concurrentCounter += 1
             }
         }
         
-        let arr = Array(concSeq);
-        let normalCounter = arr.count;
+        let array = Array(concurrentSequence);
+        let normalCounter = array.count;
         
         XCTAssert(normalCounter == concurrentCounter)
         return normalCounter == concurrentCounter
@@ -49,8 +50,9 @@ class RAVConcurrentContainersTests: XCTestCase {
         for i in 0..<count {
             values.append(DataItem(value: i))
         }
-        let concurrentConteinter = values.concurrent
-        XCTAssert(checkForEach(concurrentConteinter))
+        let queue = OperationQueue()
+        let concurrentContainer = values.concurrent(onQueue: queue)
+        XCTAssert(checkForEach(concurrentContainer, onQueue: queue))
     }
     
     func testForEachSet() {
@@ -58,8 +60,10 @@ class RAVConcurrentContainersTests: XCTestCase {
         let values = Set<DataItem>((0..<count).map({ (i) -> DataItem in
             return DataItem(value:i)
         }))
-        let concurrentConteiner = values.concurrent
-        XCTAssert(checkForEach(concurrentConteiner))
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        let concurrentContainer = values.concurrent(onQueue: queue)
+        XCTAssert(checkForEach(concurrentContainer, onQueue: queue))
     }
     
     
@@ -83,6 +87,7 @@ class RAVConcurrentContainersTests: XCTestCase {
     
     func testForEachString() {
         let string = "qwertyuiopasdfghjklzxcvbnm,."
-        XCTAssert(checkForEach(string.concurrent))
+        let queue = OperationQueue()
+        XCTAssert(checkForEach(string.concurrent(onQueue: queue), onQueue: queue))
     }
 }
