@@ -1,15 +1,15 @@
 //
-//  RAVConcurrentContaintersTests.swift
-//  RAVConcurrentContaintersTests
+//  RAVConcurrentContainersTests.swift
+//  RAVConcurrentContainersTests
 //
 //  Created by Andrew Romanov on 12.10.2019.
 //  Copyright © 2019 Andrew Romanov. All rights reserved.
 //
 
 import XCTest
-@testable import RAVConcurrentContainters
+@testable import RAVConcurrentContainers
 
-class RAVConcurrentContaintersTests: XCTestCase {
+class RAVConcurrentContainersTests: XCTestCase {
 //	func forEach(_ body: @escaping (Element) -> Void)
 //		func map<T>(_ transform: @escaping (Element) -> T) -> [T]
 //		func compactMap<ElementOfResult>(_ transform: @escaping (Element) -> ElementOfResult?) -> [ElementOfResult]

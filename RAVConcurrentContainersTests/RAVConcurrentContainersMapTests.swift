@@ -1,13 +1,13 @@
 //
 //  RAVConcurrentContainersMapTests.swift
-//  RAVConcurrentContaintersTests
+//  RAVConcurrentContainersTests
 //
 //  Created by Andrew Romanov on 19.01.2020.
 //  Copyright © 2020 Andrew Romanov. All rights reserved.
 //
 
 import XCTest
-@testable import RAVConcurrentContainters
+@testable import RAVConcurrentContainers
 
 class RAVConcurrentContainersMapTests: XCTestCase {
 

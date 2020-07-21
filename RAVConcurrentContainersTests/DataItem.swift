@@ -1,6 +1,6 @@
 //
 //  DataItem.swift
-//  RAVConcurrentContaintersTests
+//  RAVConcurrentContainersTests
 //
 //  Created by Andrew Romanov on 16.01.2020.
 //  Copyright © 2020 Andrew Romanov. All rights reserved.

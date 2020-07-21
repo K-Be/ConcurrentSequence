@@ -1,6 +1,6 @@
 //
 //  ConcurrentSequence.swift
-//  RAVConcurrentContainters
+//  RAVConcurrentContainers
 //
 //  Created by Andrew Romanov on 12.10.2019.
 //  Copyright © 2019 Andrew Romanov. All rights reserved.
