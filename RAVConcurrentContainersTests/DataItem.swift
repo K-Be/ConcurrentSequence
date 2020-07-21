@@ -9,5 +9,5 @@
 import Foundation
 
 struct DataItem : Equatable, Hashable {
-	let value : Int
+    let value : Int
 }

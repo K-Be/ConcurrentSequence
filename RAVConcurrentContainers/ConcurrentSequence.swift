@@ -10,7 +10,7 @@ import Foundation
 
 
 public struct ConcurrentSequence <Seq : Sequence> : ConcurrentSequenceP, Enumerated, ConcurrentEnumerators {
-		
+    
     public typealias Element = Seq.Element
     public typealias Iterator = Seq.Iterator
     
@@ -47,7 +47,7 @@ public struct ConcurrentSequence <Seq : Sequence> : ConcurrentSequenceP, Enumera
         queue.waitUntilAllOperationsAreFinished()
     }
     
-	
+    
     public func forEach(_ body: @escaping (_ element:Seq.Element, _ stop: inout Bool) -> Void) {
         let queue = OperationQueue()
         queue.qualityOfService = self.qualityOfService
@@ -105,11 +105,11 @@ public struct ConcurrentSequence <Seq : Sequence> : ConcurrentSequenceP, Enumera
         
         queue.waitUntilAllOperationsAreFinished()
     }
-	
-	
-	public func enumerated() -> EnumeratedSequence <Seq> {
-		return self.storage.enumerated()
-	}
+    
+    
+    public func enumerated() -> EnumeratedSequence <Seq> {
+        return self.storage.enumerated()
+    }
 }
 
 
