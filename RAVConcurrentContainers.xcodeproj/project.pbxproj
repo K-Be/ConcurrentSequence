@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		134F914F23D49D4D003A4F80 /* RAVConcurrentContainersMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134F914E23D49D4D003A4F80 /* RAVConcurrentContainersMapTests.swift */; };
 		135E3A8024C6E28200E15F37 /* LockTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135E3A7F24C6E28200E15F37 /* LockTest.swift */; };
+		1375E8A825455AFB007A3C4A /* RAVConcurrentContainersFirstWhereTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1375E8A725455AFB007A3C4A /* RAVConcurrentContainersFirstWhereTest.swift */; };
 		138D894723D0AC2B00D09600 /* DataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138D894623D0AC2B00D09600 /* DataItem.swift */; };
 		13AD419C2351A9E500A5871E /* RAVConcurrentContainers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13AD41922351A9E500A5871E /* RAVConcurrentContainers.framework */; };
 		13AD41A12351A9E500A5871E /* RAVConcurrentContaintersForEachTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AD41A02351A9E500A5871E /* RAVConcurrentContaintersForEachTests.swift */; };
@@ -31,6 +32,7 @@
 /* Begin PBXFileReference section */
 		134F914E23D49D4D003A4F80 /* RAVConcurrentContainersMapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAVConcurrentContainersMapTests.swift; sourceTree = "<group>"; };
 		135E3A7F24C6E28200E15F37 /* LockTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockTest.swift; sourceTree = "<group>"; };
+		1375E8A725455AFB007A3C4A /* RAVConcurrentContainersFirstWhereTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAVConcurrentContainersFirstWhereTest.swift; sourceTree = "<group>"; };
 		138D894623D0AC2B00D09600 /* DataItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataItem.swift; sourceTree = "<group>"; };
 		13AD41922351A9E500A5871E /* RAVConcurrentContainers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RAVConcurrentContainers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		13AD41952351A9E500A5871E /* RAVConcurrentContainers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RAVConcurrentContainers.h; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			children = (
 				13AD41A02351A9E500A5871E /* RAVConcurrentContaintersForEachTests.swift */,
 				134F914E23D49D4D003A4F80 /* RAVConcurrentContainersMapTests.swift */,
+				1375E8A725455AFB007A3C4A /* RAVConcurrentContainersFirstWhereTest.swift */,
 				135E3A7F24C6E28200E15F37 /* LockTest.swift */,
 				138D894623D0AC2B00D09600 /* DataItem.swift */,
 				13AD41A22351A9E500A5871E /* Info.plist */,
@@ -226,6 +229,7 @@
 			files = (
 				138D894723D0AC2B00D09600 /* DataItem.swift in Sources */,
 				13AD41A12351A9E500A5871E /* RAVConcurrentContaintersForEachTests.swift in Sources */,
+				1375E8A825455AFB007A3C4A /* RAVConcurrentContainersFirstWhereTest.swift in Sources */,
 				135E3A8024C6E28200E15F37 /* LockTest.swift in Sources */,
 				134F914F23D49D4D003A4F80 /* RAVConcurrentContainersMapTests.swift in Sources */,
 			);

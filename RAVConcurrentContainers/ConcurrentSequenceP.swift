@@ -28,12 +28,11 @@ public extension ConcurrentSequenceP where Self.Element : Equatable {
     }
 }
 
-
-
-public protocol ConcurrentEnumerators {
-    
+public protocol ElementBasedType {
     associatedtype Element
-    
+}
+
+public protocol ConcurrentEnumerators : ElementBasedType {
     func forEach(_ body: @escaping (Element) -> Void)
     func forEach(_ body: @escaping (_ element:Element, _ stop: inout Bool) -> Void)
     func forEach<OtherSequence>(withOther other: OtherSequence, _ body: @escaping (_ selfElement: Element?, _ otherElement: OtherSequence.Element?, _ stop: inout Bool) -> Void) -> Void where OtherSequence : Sequence
@@ -145,34 +144,22 @@ public extension ConcurrentSequenceP where Self : ConcurrentEnumerators {
 
 
 
-public protocol Enumerated : ConcurrentSequenceP where Seq.Element == Self.Element {
-    
-    associatedtype Seq : Sequence
-    func enumerated() -> EnumeratedSequence <Seq>
-    
+public protocol Enumerated: Sequence {
+    func enumerated() -> EnumeratedSequence<Self>
 }
-
 
 
 public extension ConcurrentSequenceP where Self:Enumerated {
     func first(where predicate: @escaping (Self.Element) -> Bool) -> Self.Element? {
         var goodResults = Array<EnumeratedSequence<Array<Self.Element> >.Element>();
         let lock = Lock();
-        
         self.enumerated().concurrent.forEach { (numericElement, stop: inout Bool) in
             let (_, element) : (Int, Self.Element) = numericElement;
-            var emptyResults = true
-            lock.sync {
-                emptyResults = goodResults.isEmpty
-            }
-            if emptyResults {
-                let good = predicate(element)
-                if good {
+            let good = predicate(element)
+            if good {
+                lock.sync {
                     goodResults.append(numericElement)
                 }
-            }
-            else {
-                stop = true
             }
         }
         
